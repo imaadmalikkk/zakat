@@ -5,6 +5,8 @@ import { FiqhHint } from "../fiqh-hint";
 import { CurrencyInput } from "../currency-input";
 import { WhyExpander } from "../why-expander";
 import { categoryHints } from "@/data/categories";
+import { useCurrency } from "@/lib/currency-context";
+import { formatCurrency } from "@/lib/format";
 import type { GoldSilverInputs } from "@/lib/types";
 
 interface GoldSilverSectionProps {
@@ -15,6 +17,7 @@ interface GoldSilverSectionProps {
 }
 
 export function GoldSilverSection({ value, onChange, goldPrice, silverPrice }: GoldSilverSectionProps) {
+  const { currency } = useCurrency();
   const hint = categoryHints["gold-silver"];
 
   return (
@@ -35,7 +38,7 @@ export function GoldSilverSection({ value, onChange, goldPrice, silverPrice }: G
           </div>
           {value.goldWeightGrams > 0 && (
             <div className="text-xs text-neutral-400 mt-1">
-              Value: ${(value.goldWeightGrams * goldPrice).toLocaleString("en-US", { minimumFractionDigits: 2 })}
+              Value: {formatCurrency(value.goldWeightGrams * goldPrice, currency)}
             </div>
           )}
         </div>
@@ -53,7 +56,7 @@ export function GoldSilverSection({ value, onChange, goldPrice, silverPrice }: G
           </div>
           {value.silverWeightGrams > 0 && (
             <div className="text-xs text-neutral-400 mt-1">
-              Value: ${(value.silverWeightGrams * silverPrice).toLocaleString("en-US", { minimumFractionDigits: 2 })}
+              Value: {formatCurrency(value.silverWeightGrams * silverPrice, currency)}
             </div>
           )}
         </div>

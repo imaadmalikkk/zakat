@@ -10,13 +10,13 @@ export function getNisabThreshold(config: NisabConfig): number {
   return SILVER_NISAB_GRAMS * config.silverPricePerGram;
 }
 
-export async function fetchMetalPrices(): Promise<{
+export async function fetchMetalPrices(baseCurrency: string = "GBP"): Promise<{
   goldPerGram: number;
   silverPerGram: number;
 }> {
   try {
     const res = await fetch(
-      "https://api.metalpriceapi.com/v1/latest?api_key=demo&base=USD&currencies=XAU,XAG"
+      `https://api.metalpriceapi.com/v1/latest?api_key=demo&base=${baseCurrency}&currencies=XAU,XAG`
     );
     if (!res.ok) throw new Error("API error");
     const data = await res.json();

@@ -1,6 +1,7 @@
 "use client";
 
 import { formatCurrency } from "@/lib/format";
+import { useCurrency } from "@/lib/currency-context";
 import type { ZakatSummary } from "@/lib/types";
 
 interface FullSummaryProps {
@@ -9,6 +10,8 @@ interface FullSummaryProps {
 }
 
 export function FullSummary({ summary, onReset }: FullSummaryProps) {
+  const { currency } = useCurrency();
+  const fmt = (n: number) => formatCurrency(n, currency);
   const standardCategories = summary.categories.filter(
     (c) => c.categoryId !== "livestock" && c.categoryId !== "agriculture"
   );
@@ -22,14 +25,14 @@ export function FullSummary({ summary, onReset }: FullSummaryProps) {
         <div className="bg-emerald-50 border border-emerald-200 rounded-lg p-4 mb-6">
           <div className="text-sm font-medium text-emerald-800">Your wealth exceeds the nisab &mdash; zakat is obligatory</div>
           <div className="text-xs text-emerald-700 mt-1">
-            Nisab: {formatCurrency(summary.nisabThreshold)} ({summary.nisabStandard} standard) &middot; Your zakatable wealth: {formatCurrency(summary.netZakatableWealth)}
+            Nisab: {fmt(summary.nisabThreshold)} ({summary.nisabStandard} standard) &middot; Your zakatable wealth: {fmt(summary.netZakatableWealth)}
           </div>
         </div>
       ) : (
         <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
           <div className="text-sm font-medium text-neutral-700">Your wealth is below the nisab &mdash; no zakat is due</div>
           <div className="text-xs text-neutral-500 mt-1">
-            Nisab: {formatCurrency(summary.nisabThreshold)} ({summary.nisabStandard} standard) &middot; Your zakatable wealth: {formatCurrency(summary.netZakatableWealth)}
+            Nisab: {fmt(summary.nisabThreshold)} ({summary.nisabStandard} standard) &middot; Your zakatable wealth: {fmt(summary.netZakatableWealth)}
           </div>
         </div>
       )}
@@ -37,8 +40,8 @@ export function FullSummary({ summary, onReset }: FullSummaryProps) {
       {/* Main number */}
       <div className="text-center py-5 mb-6">
         <div className="text-xs font-medium uppercase tracking-wider text-neutral-400 mb-2">Your Zakat Due</div>
-        <div className="text-4xl font-bold text-neutral-900 tracking-tight">{formatCurrency(summary.totalZakatDue)}</div>
-        <div className="text-sm text-neutral-500 mt-1">2.5% of {formatCurrency(summary.netZakatableWealth)}</div>
+        <div className="text-4xl font-bold text-neutral-900 tracking-tight">{fmt(summary.totalZakatDue)}</div>
+        <div className="text-sm text-neutral-500 mt-1">2.5% of {fmt(summary.netZakatableWealth)}</div>
       </div>
 
       {/* Breakdown */}
@@ -50,11 +53,11 @@ export function FullSummary({ summary, onReset }: FullSummaryProps) {
               <div>
                 <div className="text-sm text-neutral-900">{cat.label}</div>
                 <div className="text-xs text-neutral-400">
-                  2.5% of {formatCurrency(cat.zakatableAmount)}
+                  2.5% of {fmt(cat.zakatableAmount)}
                   {cat.note && ` (${cat.note})`}
                 </div>
               </div>
-              <div className="text-sm font-medium text-neutral-900">{formatCurrency(cat.zakatDue)}</div>
+              <div className="text-sm font-medium text-neutral-900">{fmt(cat.zakatDue)}</div>
             </div>
           ))}
 
@@ -64,7 +67,7 @@ export function FullSummary({ summary, onReset }: FullSummaryProps) {
                 <div className="text-sm text-neutral-900">{agriculture.label}</div>
                 <div className="text-xs text-neutral-400">{agriculture.note}</div>
               </div>
-              <div className="text-sm font-medium text-neutral-900">{formatCurrency(agriculture.zakatDue)}</div>
+              <div className="text-sm font-medium text-neutral-900">{fmt(agriculture.zakatDue)}</div>
             </div>
           )}
 
@@ -82,9 +85,9 @@ export function FullSummary({ summary, onReset }: FullSummaryProps) {
             <div className="flex justify-between items-center py-2.5">
               <div>
                 <div className="text-sm text-red-600">Less: Debts &amp; Liabilities</div>
-                <div className="text-xs text-neutral-400">Deductions: {formatCurrency(summary.totalDeductions)}</div>
+                <div className="text-xs text-neutral-400">Deductions: {fmt(summary.totalDeductions)}</div>
               </div>
-              <div className="text-sm font-medium text-red-600">&minus;{formatCurrency(summary.totalDeductions * 0.025)}</div>
+              <div className="text-sm font-medium text-red-600">&minus;{fmt(summary.totalDeductions * 0.025)}</div>
             </div>
           )}
         </div>

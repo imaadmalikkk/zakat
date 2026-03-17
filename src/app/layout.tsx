@@ -1,6 +1,8 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Naskh_Arabic } from "next/font/google";
 import { Nav } from "@/components/nav";
+import { CurrencySelector } from "@/components/currency-selector";
+import { CurrencyProvider } from "@/lib/currency-context";
 import "./globals.css";
 
 const inter = Inter({
@@ -40,6 +42,7 @@ export default function RootLayout({
       <body
         className={`${inter.variable} ${notoNaskhArabic.variable} antialiased`}
       >
+        <CurrencyProvider>
         <div className="min-h-screen flex flex-col">
           <main className="flex-1 w-full max-w-2xl mx-auto px-4 sm:px-6">
             <div className="pt-8 sm:pt-12 flex items-center justify-between">
@@ -49,7 +52,10 @@ export default function RootLayout({
               >
                 Zakat Calculator
               </a>
-              <Nav />
+              <div className="flex items-center">
+                <Nav />
+                <CurrencySelector />
+              </div>
             </div>
             {children}
           </main>
@@ -64,6 +70,7 @@ export default function RootLayout({
             </div>
           </footer>
         </div>
+        </CurrencyProvider>
       </body>
     </html>
   );

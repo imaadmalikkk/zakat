@@ -17,6 +17,7 @@ import { StickySummary } from "@/components/calculator/sticky-summary";
 import { FullSummary } from "@/components/calculator/full-summary";
 import { calculateZakat } from "@/lib/zakat-rules";
 import { fetchMetalPrices } from "@/lib/nisab";
+import { useCurrency } from "@/lib/currency-context";
 import type { CalculatorState } from "@/lib/types";
 
 const initialState: CalculatorState = {
@@ -36,17 +37,18 @@ const initialState: CalculatorState = {
 
 export default function CalculatorPage() {
   const [state, setState] = useState<CalculatorState>(initialState);
+  const { currency } = useCurrency();
 
   useEffect(() => {
     if (!state.nisab.manualOverride) {
-      fetchMetalPrices().then((prices) => {
+      fetchMetalPrices(currency).then((prices) => {
         setState((prev) => ({
           ...prev,
           nisab: { ...prev.nisab, goldPricePerGram: prices.goldPerGram, silverPricePerGram: prices.silverPerGram },
         }));
       });
     }
-  }, []);
+  }, [currency]);
 
   const summary = useMemo(() => calculateZakat(state), [state]);
 
