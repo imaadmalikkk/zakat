@@ -101,7 +101,7 @@ export function FullSummary({ summary, onReset }: FullSummaryProps) {
       </div>
 
       {/* Disclaimer */}
-      <p className="text-[11px] text-neutral-400 leading-relaxed text-center">
+      <p className="text-xs text-neutral-400 leading-relaxed text-center">
         This calculator is based on the positions of Shaykh Ibn Baz, Shaykh Ibn Uthaymeen, and Shaykh al-Islam Ibn Taymiyyah (rahimahumullah). For complex cases, consult a scholar directly.
       </p>
     </div>

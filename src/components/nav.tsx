@@ -12,12 +12,12 @@ export function Nav() {
   ];
 
   return (
-    <nav className="flex gap-6 text-sm">
+    <nav className="flex gap-4 sm:gap-6 text-sm">
       {links.map((link) => (
         <Link
           key={link.label}
           href={link.href}
-          className={`transition-colors ${
+          className={`py-2 transition-colors ${
             link.active
               ? "text-neutral-900 font-medium"
               : "text-neutral-500 hover:text-neutral-700"

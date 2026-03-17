@@ -120,10 +120,19 @@ export interface ArticleMeta {
   group: "foundations" | "categories" | "issues";
 }
 
+export interface ScholarlyPosition {
+  position: string;
+  scholars: string[];
+  school?: string;
+  evidence?: string;
+  isAppPosition?: boolean;
+}
+
 export interface ArticleContent {
   heading: string;
   subheading: string;
   rulingParts: { bold: string; normal?: string }[];
   evidence: string;
   citations: ScholarCitation[];
+  positions?: ScholarlyPosition[];
 }

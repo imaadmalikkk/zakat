@@ -43,9 +43,44 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
         <div className="border-l-2 border-neutral-200 pl-3.5 text-sm text-neutral-600 leading-relaxed">{content.evidence}</div>
       </div>
 
-      {/* Scholar positions */}
+      {/* Scholarly positions (comparative view — only shown when positions exist) */}
+      {content.positions && content.positions.length > 0 && (
+        <div className="mb-6">
+          <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-3">Scholarly Positions</div>
+          <div className="flex flex-col gap-2.5">
+            {content.positions.map((pos, i) => (
+              <div
+                key={i}
+                className={`border rounded-lg p-4 ${
+                  pos.isAppPosition
+                    ? "border-emerald-200 bg-emerald-50/50"
+                    : "border-neutral-200 bg-white"
+                }`}
+              >
+                {pos.isAppPosition && (
+                  <span className="inline-block text-xs font-semibold uppercase tracking-wider text-emerald-700 bg-emerald-100 px-2.5 py-1 rounded mb-2">
+                    Position used by this calculator
+                  </span>
+                )}
+                {pos.school && (
+                  <div className="text-xs font-medium text-neutral-400 mb-1">{pos.school}</div>
+                )}
+                <p className="text-sm font-medium text-neutral-900 mb-1.5">{pos.position}</p>
+                <div className="text-xs text-neutral-500">
+                  {pos.scholars.join(" · ")}
+                </div>
+                {pos.evidence && (
+                  <p className="text-xs text-neutral-500 mt-1.5 leading-relaxed">{pos.evidence}</p>
+                )}
+              </div>
+            ))}
+          </div>
+        </div>
+      )}
+
+      {/* Detailed citations */}
       <div className="mb-8">
-        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-3">Scholar Positions</div>
+        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-3">Detailed Citations</div>
         <div className="flex flex-col gap-2.5">
           {content.citations.map((citation, i) => (
             <ScholarCitationCard key={i} citation={citation} />

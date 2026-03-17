@@ -27,10 +27,10 @@ export function WhyExpander({ explanation, citation, learnSlug }: WhyExpanderPro
       {open && (
         <div className="mt-3 border-l-2 border-neutral-200 pl-3.5">
           <p className="text-sm text-neutral-600 leading-relaxed mb-2.5">{explanation}</p>
-          <div className="bg-neutral-50 border border-neutral-200 rounded-md p-3">
+          <div className="bg-neutral-50 border border-neutral-200 rounded-md p-3.5">
             <div className="text-xs font-medium text-neutral-900">{citation.scholar}</div>
             <div className="text-xs text-neutral-500 italic mt-1">&ldquo;{citation.quote}&rdquo;</div>
-            <div className="text-[11px] text-neutral-400 mt-1">{citation.source}</div>
+            <div className="text-xs text-neutral-400 mt-1">{citation.source}</div>
           </div>
         </div>
       )}

@@ -18,8 +18,8 @@ export function StickySummary({ summary }: StickySummaryProps) {
           <div className="text-lg font-semibold text-neutral-900">{formatCurrency(summary.totalZakatDue)}</div>
         </div>
       </div>
-      <div className="max-w-2xl mx-auto px-4 sm:px-6 pb-2">
-        <div className="text-[11px] text-neutral-400">
+      <div className="max-w-2xl mx-auto px-4 sm:px-6 pb-[env(safe-area-inset-bottom,8px)]">
+        <div className="text-xs text-neutral-400">
           Nisab: {formatCurrency(summary.nisabThreshold)} ({summary.nisabStandard} standard)
           {summary.meetsNisab ? " · You meet the nisab \u2713" : " · Below nisab \u2014 no zakat due"}
         </div>

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { Inter, Noto_Naskh_Arabic } from "next/font/google";
 import { Nav } from "@/components/nav";
 import "./globals.css";
@@ -13,6 +13,10 @@ const notoNaskhArabic = Noto_Naskh_Arabic({
   subsets: ["arabic"],
   weight: ["400", "700"],
 });
+
+export const viewport: Viewport = {
+  viewportFit: "cover",
+};
 
 export const metadata: Metadata = {
   title: "Zakat Calculator",
