@@ -2,9 +2,13 @@ import Link from "next/link";
 import { articles } from "@/lib/articles";
 
 export default function LearnPage() {
-  const foundations = articles.filter((a) => a.group === "foundations");
-  const categories = articles.filter((a) => a.group === "categories");
-  const issues = articles.filter((a) => a.group === "issues");
+  const groups = [
+    { key: "foundations", label: "Foundations" },
+    { key: "wealth", label: "Your Wealth" },
+    { key: "recipients", label: "Giving Your Zakat" },
+    { key: "practical", label: "Practical Questions" },
+    { key: "deductions", label: "Debts & Deductions" },
+  ] as const;
 
   function ArticleGroup({ label, items }: { label: string; items: typeof articles }) {
     return (
@@ -26,9 +30,9 @@ export default function LearnPage() {
     <div className="pt-8 sm:pt-12 pb-12">
       <h1 className="text-2xl sm:text-3xl font-semibold tracking-tight text-neutral-900">Understanding Zakat</h1>
       <p className="text-sm text-neutral-500 mt-1.5 mb-8">Rulings and evidence from the Quran, Sunnah, and the scholars of the Salaf</p>
-      <ArticleGroup label="Foundations" items={foundations} />
-      <ArticleGroup label="Asset Categories" items={categories} />
-      <ArticleGroup label="Common Issues" items={issues} />
+      {groups.map((g) => (
+        <ArticleGroup key={g.key} label={g.label} items={articles.filter((a) => a.group === g.key)} />
+      ))}
     </div>
   );
 }

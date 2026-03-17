@@ -117,7 +117,7 @@ export interface ArticleMeta {
   slug: string;
   title: string;
   description: string;
-  group: "foundations" | "categories" | "issues";
+  group: "foundations" | "wealth" | "recipients" | "practical" | "deductions";
 }
 
 export interface ScholarlyPosition {
@@ -131,6 +131,8 @@ export interface ScholarlyPosition {
 export interface ArticleContent {
   heading: string;
   subheading: string;
+  rulingLabel?: string;
+  evidenceLabel?: string;
   rulingParts: { bold: string; normal?: string }[];
   evidence: string;
   citations: ScholarCitation[];

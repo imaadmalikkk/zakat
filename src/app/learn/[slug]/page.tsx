@@ -28,7 +28,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       {/* Ruling box */}
       <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
-        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">The Ruling</div>
+        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">{content.rulingLabel ?? "The Ruling"}</div>
         {content.rulingParts.map((part, i) => (
           <p key={i} className="text-sm text-neutral-900 leading-relaxed">
             <strong>{part.bold}</strong>
@@ -39,7 +39,7 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
 
       {/* Evidence */}
       <div className="mb-6">
-        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">Evidence</div>
+        <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">{content.evidenceLabel ?? "Evidence"}</div>
         <div className="border-l-2 border-neutral-200 pl-3.5 text-sm text-neutral-600 leading-relaxed">{content.evidence}</div>
       </div>
 
