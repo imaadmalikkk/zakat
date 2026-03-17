@@ -60,7 +60,7 @@ export function CurrencySelector() {
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen(!open)}
-        className="text-xs font-medium text-neutral-500 hover:text-neutral-700 transition-colors py-2 px-1.5"
+        className="text-xs font-medium text-neutral-500 hover:text-neutral-700 transition-colors py-2 pr-1"
       >
         {currency} <span className="text-[10px]">&#9662;</span>
       </button>

@@ -52,9 +52,9 @@ export default function RootLayout({
               >
                 Zakat Calculator
               </a>
-              <div className="flex items-center gap-1">
+              <div className="flex items-center gap-2">
                 <Nav />
-                <span className="mx-1 h-4 w-px bg-neutral-200" />
+                <span className="h-4 w-px bg-neutral-200" />
                 <CurrencySelector />
               </div>
             </div>
