@@ -133,7 +133,7 @@ export interface ArticleContent {
   subheading: string;
   rulingLabel?: string;
   evidenceLabel?: string;
-  rulingParts: { bold: string; normal?: string }[];
+  rulingParts: { bold: string; normal?: string; link?: { label: string; href: string } }[];
   evidence: string;
   citations: ScholarCitation[];
   positions?: ScholarlyPosition[];

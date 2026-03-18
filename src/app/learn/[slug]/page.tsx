@@ -30,10 +30,17 @@ export default async function ArticlePage({ params }: { params: Promise<{ slug: 
       <div className="bg-neutral-50 border border-neutral-200 rounded-lg p-4 mb-6">
         <div className="text-xs font-semibold uppercase tracking-wider text-neutral-400 mb-2">{content.rulingLabel ?? "The Ruling"}</div>
         {content.rulingParts.map((part, i) => (
-          <p key={i} className="text-sm text-neutral-900 leading-relaxed">
-            <strong>{part.bold}</strong>
-            {part.normal && <span> {part.normal}</span>}
-          </p>
+          <div key={i} className="text-sm text-neutral-900 leading-relaxed">
+            <p>
+              <strong>{part.bold}</strong>
+              {part.normal && <span> {part.normal}</span>}
+            </p>
+            {part.link && (
+              <Link href={part.link.href} className="inline-block mt-1.5 text-xs font-medium text-neutral-500 hover:text-neutral-900 border border-neutral-200 rounded-md px-2.5 py-1 transition-colors">
+                {part.link.label} &rarr;
+              </Link>
+            )}
+          </div>
         ))}
       </div>
 
