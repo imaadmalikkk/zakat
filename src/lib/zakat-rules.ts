@@ -22,13 +22,8 @@ function calcCash(inputs: CalculatorState["cash"]): CategoryResult {
 
 function calcGoldSilver(
   inputs: CalculatorState["goldSilver"],
-  goldPrice: number,
-  silverPrice: number
 ): CategoryResult {
-  const goldValue = inputs.goldWeightGrams * goldPrice + inputs.goldJewelryValue;
-  const silverValue =
-    inputs.silverWeightGrams * silverPrice + inputs.silverJewelryValue;
-  const total = goldValue + silverValue;
+  const total = inputs.goldValue + inputs.silverValue;
   return {
     categoryId: "gold-silver",
     label: "Gold & Silver",
@@ -163,11 +158,7 @@ function calcLivestock(
 export function calculateZakat(state: CalculatorState): ZakatSummary {
   const categories: CategoryResult[] = [
     calcCash(state.cash),
-    calcGoldSilver(
-      state.goldSilver,
-      state.nisab.goldPricePerGram,
-      state.nisab.silverPricePerGram
-    ),
+    calcGoldSilver(state.goldSilver),
     calcStocks(state.stocks),
     calcBusiness(state.business),
     calcCrypto(state.crypto),

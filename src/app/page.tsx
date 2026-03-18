@@ -23,7 +23,7 @@ import type { CalculatorState } from "@/lib/types";
 const initialState: CalculatorState = {
   nisab: { standard: "silver", goldPricePerGram: 120, silverPricePerGram: 1.9, manualOverride: false },
   cash: { bankAccounts: 0, cashOnHand: 0, otherCurrencies: 0 },
-  goldSilver: { goldWeightGrams: 0, silverWeightGrams: 0, goldJewelryValue: 0, silverJewelryValue: 0 },
+  goldSilver: { goldValue: 0, silverValue: 0 },
   stocks: { isActiveTrader: false, tradingPortfolioValue: 0, profitsAndDividends: 0 },
   business: { inventoryValue: 0, rawMaterials: 0, receivables: 0 },
   crypto: { totalValue: 0 },
@@ -64,7 +64,7 @@ export default function CalculatorPage() {
       <div className="flex flex-col gap-3">
         <NisabSettings value={state.nisab} onChange={(v) => update("nisab", v)} />
         <CashSection value={state.cash} onChange={(v) => update("cash", v)} />
-        <GoldSilverSection value={state.goldSilver} onChange={(v) => update("goldSilver", v)} goldPrice={state.nisab.goldPricePerGram} silverPrice={state.nisab.silverPricePerGram} />
+        <GoldSilverSection value={state.goldSilver} onChange={(v) => update("goldSilver", v)} />
         <StocksSection value={state.stocks} onChange={(v) => update("stocks", v)} />
         <BusinessSection value={state.business} onChange={(v) => update("business", v)} />
         <CryptoSection value={state.crypto} onChange={(v) => update("crypto", v)} />

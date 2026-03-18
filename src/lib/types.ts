@@ -34,10 +34,8 @@ export interface CashInputs {
 }
 
 export interface GoldSilverInputs {
-  goldWeightGrams: number;
-  silverWeightGrams: number;
-  goldJewelryValue: number;
-  silverJewelryValue: number;
+  goldValue: number;
+  silverValue: number;
 }
 
 export interface StocksInputs {
