@@ -21,7 +21,7 @@ import { useCurrency } from "@/lib/currency-context";
 import type { CalculatorState } from "@/lib/types";
 
 const initialState: CalculatorState = {
-  nisab: { standard: "silver", goldPricePerGram: 90, silverPricePerGram: 1.0, manualOverride: false },
+  nisab: { standard: "silver", goldPricePerGram: 120, silverPricePerGram: 1.9, manualOverride: false },
   cash: { bankAccounts: 0, cashOnHand: 0, otherCurrencies: 0 },
   goldSilver: { goldWeightGrams: 0, silverWeightGrams: 0, goldJewelryValue: 0, silverJewelryValue: 0 },
   stocks: { isActiveTrader: false, tradingPortfolioValue: 0, profitsAndDividends: 0 },

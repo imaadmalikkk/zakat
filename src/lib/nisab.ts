@@ -10,20 +10,28 @@ export function getNisabThreshold(config: NisabConfig): number {
   return SILVER_NISAB_GRAMS * config.silverPricePerGram;
 }
 
+const TROY_OZ_TO_GRAMS = 31.1035;
+
 export async function fetchMetalPrices(baseCurrency: string = "GBP"): Promise<{
   goldPerGram: number;
   silverPerGram: number;
 }> {
   try {
-    const res = await fetch(
-      `https://api.metalpriceapi.com/v1/latest?api_key=demo&base=${baseCurrency}&currencies=XAU,XAG`
-    );
-    if (!res.ok) throw new Error("API error");
-    const data = await res.json();
-    const goldPerGram = 1 / data.rates.XAU / 31.1035;
-    const silverPerGram = 1 / data.rates.XAG / 31.1035;
-    return { goldPerGram, silverPerGram };
+    const currencyKey = baseCurrency.toLowerCase();
+    const [goldRes, silverRes] = await Promise.all([
+      fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/xau.json"),
+      fetch("https://cdn.jsdelivr.net/npm/@fawazahmed0/currency-api@latest/v1/currencies/xag.json"),
+    ]);
+    if (!goldRes.ok || !silverRes.ok) throw new Error("API error");
+    const [goldData, silverData] = await Promise.all([goldRes.json(), silverRes.json()]);
+    const goldPerOz = goldData.xau?.[currencyKey];
+    const silverPerOz = silverData.xag?.[currencyKey];
+    if (!goldPerOz || !silverPerOz) throw new Error("Currency not found");
+    return {
+      goldPerGram: goldPerOz / TROY_OZ_TO_GRAMS,
+      silverPerGram: silverPerOz / TROY_OZ_TO_GRAMS,
+    };
   } catch {
-    return { goldPerGram: 90, silverPerGram: 1.0 };
+    return { goldPerGram: 120, silverPerGram: 1.9 };
   }
 }
